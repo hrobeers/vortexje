@@ -29,10 +29,13 @@ cosine_rule(int n_points, int i)
 int
 main (int argc, char **argv)
 {
-    // Create wing:
-    shared_ptr<LiftingSurface> wing(new LiftingSurface("main"));
+    // Needed to avoid creating extra vertices
+    Parameters::zero_threshold = 1;
 
-    LiftingSurfaceBuilder surface_builder(*wing);
+    // Create wing:
+    shared_ptr<Surface> wing(new Surface("main"));
+
+    SurfaceBuilder surface_builder(*wing);
 
     const double AR = 6.0;
     const double chord = 0.5;
@@ -57,14 +60,14 @@ main (int argc, char **argv)
 
         vector<Vector3d, Eigen::aligned_allocator<Vector3d> > airfoil_points;
 
-        if (i == 0 || i == n_airfoils - 1)
-            chord_y = span * 0.001;
-//        if (i == 0 || i == n_airfoils - 1) {
-//            Vector3d tip_point(0.0, 0.0, 0.0);
-//            for (int j = 0; j < n_points_per_airfoil; j++)
-//                airfoil_points.push_back(tip_point);
+//        if (i == 0 || i == n_airfoils - 1)
+//            chord_y = span * 0.01;
+        if (i == 0 || i == n_airfoils - 1) {
+            Vector3d tip_point(0.0, 0.0, 0.0);
+            for (int j = 0; j < n_points_per_airfoil; j++)
+                airfoil_points.push_back(tip_point);
 
-//        } else
+        } else
             airfoil_points = NACA4AirfoilGenerator::generate(0, 0, 0.12, true, chord_y, n_points_per_airfoil, trailing_edge_point_id);
 
         for (int j = 0; j < (int) airfoil_points.size(); j++) {
