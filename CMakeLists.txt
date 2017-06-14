@@ -15,7 +15,8 @@ find_package(Eigen3 3.2.2 REQUIRED)
 
 # Base compiler flags
 if(CMAKE_COMPILER_IS_GNUCXX)
-    set(CMAKE_CXX_FLAGS "-O3 -march=native -Wall") # Optimize for this machine, and turn on compiler warnings.
+    set(CMAKE_CXX_FLAGS "-march=native -Wall")     # Optimize for this machine, and turn on compiler warnings.
+    set(CMAKE_CXX_FLAGS_DEBUG  "-O0 -g")           # No optimizations & debug enabled
     set(CMAKE_CXX_FLAGS_RELEASE "-O3")             # Optimize for this architecture.
 endif()
 
