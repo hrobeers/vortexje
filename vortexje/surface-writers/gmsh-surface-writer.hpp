@@ -24,6 +24,11 @@ namespace Vortexje
 class GmshSurfaceWriter : public SurfaceWriter
 {
 public:
+    /**
+       Sort vertices for gmsh-surface-loader compatibility before writing to file
+    */
+    bool sort_vertices = false;
+
     const char *file_extension() const;
                     
     bool write(const std::shared_ptr<Surface> &surface, const std::string &filename,

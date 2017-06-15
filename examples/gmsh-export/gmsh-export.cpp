@@ -93,6 +93,7 @@ main (int argc, char **argv)
     GmshSurfaceWriter writer;
     const std::vector<std::string> view_names;
     const vector<MatrixXd, Eigen::aligned_allocator<MatrixXd> > view_data;
+    writer.sort_vertices = true;
     writer.write(wing, filename, 0, 0, view_names, view_data);
 
     // Done.

@@ -62,10 +62,11 @@ GmshSurfaceWriter::write(const std::shared_ptr<Surface> &surface, const string &
     size_t n(0);
     generate(std::begin(to_sorted), std::end(to_sorted), [&]{ return n++; });
 
-    std::sort(std::begin(to_sorted),
-              std::end(to_sorted),
-              [&](int i1, int i2)
-    {
+    if (sort_vertices)
+        std::sort(std::begin(to_sorted),
+                  std::end(to_sorted),
+                  [&](int i1, int i2)
+      {
         // not sorted if span (z) not ascending
         if (surface->nodes[i1](2) != surface->nodes[i2](2))
             return surface->nodes[i1](2) < surface->nodes[i2](2);
@@ -80,7 +81,7 @@ GmshSurfaceWriter::write(const std::shared_ptr<Surface> &surface, const string &
         // sort descending by chord (x) otherwise
         else
             return surface->nodes[i1](0) > surface->nodes[i2](0);
-    } );
+      });
 
     // map sorted to unsorted indices
     map<int,int> to_unsorted;
