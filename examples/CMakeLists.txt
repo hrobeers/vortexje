@@ -1,5 +1,6 @@
 add_subdirectory(clarky-section)
 add_subdirectory(gmsh-lifting-surface)
+add_subdirectory(ply-lifting-surface)
 add_subdirectory(hawt)
 add_subdirectory(naca0012-section-oscillation)
 add_subdirectory(vawt)
